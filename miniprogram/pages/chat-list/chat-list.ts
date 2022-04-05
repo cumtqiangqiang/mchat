@@ -67,6 +67,9 @@ Page({
         // 创建一个对话
         const conversation = await createConversation(chat.user, [friendName])
         console.log('get conversation', conversation)
+        this.setData({
+            friendName: ''
+        })
         // 跳转至对话详情页
         getApp().globalData.chat = chat
         getApp().globalData.currentConversation = conversation

@@ -1,12 +1,12 @@
 <!--pages/chat-detail/chat-detail.wxml-->
-<div class="container">
+<div class="chat-detail">
     <div class="box">
-        <div wx:for="{{historyMessages}}">
-        {{item.from}}: {{item.msg}}<br/>
+        <div wx:for="{{historyMessages}}" class="info-item">
+        <div class="creator">{{item.from}}</div> <div class="content">{{item.msg}}</div><br/>
         </div>
     </div>
-    <div class="box">
+    <div class="send-box">
         <input model:value="{{inputMessage}}" placeholder="请输入要发送的内容"/>
-        <button bindtap="sendMessage">Send</button>
+        <image class="img" src="../../assets/send.svg" bindtap="sendMessage"/>
     </div>
 </div>

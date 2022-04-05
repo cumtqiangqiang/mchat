@@ -51,6 +51,10 @@ Page({
     },
 
     sendMessage () {
+        // 如果输入框内容为空的话，需要提示
+        if (!this.data.inputMessage) {
+            return 
+        }
         const current: IConversation = app.globalData.currentConversation
         current.sendMessage(this.data.inputMessage)
         // 如果发送成功，需要在history增加一条记录
