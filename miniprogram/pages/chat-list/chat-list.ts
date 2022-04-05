@@ -2,8 +2,10 @@ import { Chat } from '../../utils/chat'
 import { createConversation } from '../../utils/conversation'
 interface IChat {
     login: any,
-    getConversationList: any
+    getConversationList: any,
+    user: any
 }
+let chat: IChat = {} as IChat
 Page({
     /**
      * 页面的初始数据
@@ -11,7 +13,6 @@ Page({
     data: {
         conversationList: [],
         friendName: '',
-        chat: {} as IChat,
 
         userInfo: {
             avatarUrl: '',
@@ -40,22 +41,22 @@ Page({
             userInfo,
             hasUserInfo: true,
         })
-        this.data.chat.login(this.data.userInfo.nickName)
+        chat.login(this.data.userInfo.nickName)
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
-        const chat = new Chat()
+        chat = new Chat()
         this.setData({
-            chat,
+           //  chat,
             conversationList: chat.getConversationList()
         })
     },
     async startConversation () {
         console.log('startConversation')
-        const { friendName, chat } = this.data
+        const { friendName } = this.data
 
         console.log('chat', chat.user)
         // 创建一个对话
