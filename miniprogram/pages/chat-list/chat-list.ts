@@ -1,4 +1,5 @@
 import { Chat } from '../../utils/chat'
+import { createConversation } from '../../utils/conversation'
 interface IChat {
     login: any,
     getConversationList: any
@@ -46,21 +47,23 @@ Page({
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
-        this.data.chat = new Chat()
+        const chat = new Chat()
         this.setData({
-            conversationList: this.data.chat.getConversationList()
+            chat,
+            conversationList: chat.getConversationList()
         })
-        if (this.data.hasUserInfo) {
-            this.data.chat.login(this.data.userInfo.nickName)
-        }
     },
-    startConversation () {
-        const cid = ''
+    async startConversation () {
+        console.log('startConversation')
+        const { friendName, chat } = this.data
+
+        console.log('chat', chat.user)
         // 创建一个对话
+        const conversation = await createConversation(chat.user, [friendName])
         
         // 跳转至对话详情页
         wx.navigateTo({
-            url: `/pages/chat-detail/chat-detail?conversationId=${cid}`,
+            url: `/pages/chat-detail/chat-detail?conversationId=${conversation.id}`,
         })
     },
 

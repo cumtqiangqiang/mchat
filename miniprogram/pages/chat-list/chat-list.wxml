@@ -1,16 +1,19 @@
 <div class="chat-list">
-    <view class="userinfo">
-        <button wx:if="{{!hasUserInfo}}" bindtap="getUserProfile">点击登录</button>
-        <block wx:else>
+    <button wx:if="{{!hasUserInfo}}" bindtap="getUserProfile">点击登录</button>
+    <view wx:else>
+        <view class="userinfo">
+        <block wx:if="{{hasUserInfo}}">
             <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
             <text class="userinfo-nickname">{{userInfo.nickName}}</text>
         </block>
+        </view>
+        <div class="box">
+            <input model:value="{{friendName}}" placeholder="输入要聊天的昵称"/>
+            <button bindtap="startConversation">开始聊天</button>
+        </div>
+        <div class="box">
+            <div wx:for="{{conversationList}}"> {{item}} </div>
+        </div>
     </view>
-    <div class="box">
-        <input model:value="{{friendName}}" placeholder="输入要聊天的昵称"/>
-        <button bindtap="startConversation">开始聊天</button>
-    </div>
-    <div class="box">
-        <div wx:for="{{conversationList}}"> {{item}} </div>
-    </div>
+   
 </div>

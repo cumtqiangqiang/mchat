@@ -7,6 +7,7 @@ export function getData(index: string) {
 export function addRecord (index: string, record: any) {
     let r = getData(index) || new Set()
         // fixme 重复添加是否需要识别并给出提示？
-    r.push(record)
+    r.add(record)
+    console.log('r is', r)
     setData(index, r)
 }
