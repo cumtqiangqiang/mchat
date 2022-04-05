@@ -9,7 +9,7 @@ export class Chat {
     user: any
     constructor() {
         // 建立ws连接，并监听message事件，收到receive的事件后更新至chatInfo
-        this.realTime  = new Realtime({
+        this.realTime = new Realtime({
             appId: 'LrS3PQkfegVG5z7RbqMslgFa-gzGzoHsz',
             appKey: 'GIE69soA03t89FerdEyYIuMs',
             server: 'https://lrs3pqkf.lc-cn-n1-shared.com',
@@ -21,6 +21,7 @@ export class Chat {
      */
     login(userId: string) {
         this.realTime.createIMClient(userId).then(user => {
+            console.log('login success', user)
             this.user = user
         })
     }
