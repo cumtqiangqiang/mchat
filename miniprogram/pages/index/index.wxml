@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<div class="container">
+  <div class="box">
+    <div class="info-list">
+      <view wx:for="{{chatInfo}}"> {{item}} </view>
+    </div>
+    <div class="input-box">
+      <input model:value="{{inputMessage}}" placeholder="说点什么吧~"/>
+      <button  bindtap="sendMessage">发送</button>
+    </div>
+  </div>
+</div>

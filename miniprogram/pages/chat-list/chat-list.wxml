@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="box">
+        <div wx:for="{{conversationList}}"> {{item}} </div>
+    </div>
+    <div class="box">
+        <input model:value="{{friendName}}" placeholder="输入要聊天的昵称"/>
+        <button  bindtap="startChat">开始聊天</button>
+    </div>
+</div>
