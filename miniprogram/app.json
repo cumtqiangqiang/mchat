@@ -4,8 +4,7 @@
     "pages/chat-list/chat-list",
     "pages/index/index",
     "pages/chat-detail/chat-detail",
-    "pages/home/home",
-    "pages/logs/logs"
+    "pages/home/home"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -14,5 +13,18 @@
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "position": "top",
+    "list": [
+      {
+        "pagePath": "pages/chat-list/chat-list",
+        "text": "聊天"
+      },
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      }
+    ]
+  }
 }
