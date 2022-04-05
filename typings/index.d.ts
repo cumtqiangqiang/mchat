@@ -15,13 +15,14 @@ interface IUser {
 }
 interface IConversation {
   getMessage: any,
-  id: string,
-  name: string,
   sendMessage: any,
   getConversation: any,
-  onMessage: any
+  onMessage: any,
+  conversationId: string
 }
 interface ILeanConversation {
+  id: string,
+  name: string,
   queryMessages: any,
   send: any
 }
@@ -29,4 +30,8 @@ interface IChat {
   login: any,
   getConversationList: any,
   user: any
+}
+interface IConvRecord {
+  id: string,
+  name: string
 }

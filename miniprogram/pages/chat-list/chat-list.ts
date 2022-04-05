@@ -1,6 +1,8 @@
 import { Chat } from '../../utils/chat'
-import { createConversation } from '../../utils/conversation'
-let chat: IChat = {} as IChat
+import { Conversation, createConversation } from '../../utils/conversation'
+import {isEmtyObj} from '../../utils/util'
+
+let chat = {} as IChat
 Page({
     /**
      * 页面的初始数据
@@ -49,15 +51,22 @@ Page({
             conversationList: chat.getConversationList()
         })
     },
+    async toDetail(event: {currentTarget: {dataset: {cid: string}}}) {
+        const cid = event.currentTarget.dataset.cid
+        const conversation = new Conversation(chat.user, cid)
+        // 跳转至对话详情页 fixme
+        getApp().globalData.chat = chat
+        getApp().globalData.currentConversation = conversation
+        wx.navigateTo({
+            url: `/pages/chat-detail/chat-detail?conversationId=${conversation.conversationId}`,
+        })
+    },
     async startConversation () {
-        console.log('startConversation')
         const { friendName } = this.data
-
         console.log('chat', chat.user)
         // 创建一个对话
         const conversation = await createConversation(chat.user, [friendName])
         console.log('get conversation', conversation)
-        
         // 跳转至对话详情页
         getApp().globalData.chat = chat
         getApp().globalData.currentConversation = conversation
@@ -70,7 +79,13 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-
+        console.log('on show! chat is:', chat)
+        // 更新列表
+        if (!isEmtyObj(chat)) {
+            this.setData({
+                conversationList: chat.getConversationList()
+            })
+        }
     },
 
     /**

@@ -12,3 +12,11 @@
     margin: 20rpx;
     border-radius: 50%;
   }
+  .list-item {
+    display: flex;
+    align-items: center;
+    color: #333;
+    padding: 10px 40px;
+    border-top: 1px solid #999;
+    height: 30px;
+  }

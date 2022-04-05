@@ -51,5 +51,5 @@ function saveConversation (conversation: any) {
 }
 
 function generateConversionName(members: string[]) {
-    return `${members.join(',')}的对话`
+    return `与${members.join(',')}的对话`
 }

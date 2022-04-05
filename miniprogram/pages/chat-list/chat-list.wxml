@@ -12,7 +12,7 @@
             <button bindtap="startConversation">开始聊天</button>
         </div>
         <div class="box">
-            <div wx:for="{{conversationList}}"> {{item}} </div>
+            <div wx:for="{{conversationList}}" class="list-item" bindtap="toDetail" data-cid="{{item.id}}"> {{item.name}} </div>
         </div>
     </view>
    
