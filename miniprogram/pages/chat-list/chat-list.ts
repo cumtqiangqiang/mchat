@@ -1,10 +1,5 @@
 import { Chat } from '../../utils/chat'
 import { createConversation } from '../../utils/conversation'
-interface IChat {
-    login: any,
-    getConversationList: any,
-    user: any
-}
 let chat: IChat = {} as IChat
 Page({
     /**
@@ -61,10 +56,13 @@ Page({
         console.log('chat', chat.user)
         // 创建一个对话
         const conversation = await createConversation(chat.user, [friendName])
+        console.log('get conversation', conversation)
         
         // 跳转至对话详情页
+        getApp().globalData.chat = chat
+        getApp().globalData.currentConversation = conversation
         wx.navigateTo({
-            url: `/pages/chat-detail/chat-detail?conversationId=${conversation.id}`,
+            url: `/pages/chat-detail/chat-detail?conversationId=${conversation.conversationId}`,
         })
     },
 

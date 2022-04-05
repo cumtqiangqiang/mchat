@@ -1,11 +1,14 @@
 // pages/chat-detail/chat-detail.ts
+// 获取应用实例
+const app = getApp<IAppOption>()
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        historyMessages: [] as {from: string, msg: string}[],
+        inputMessage: ''
     },
 
     /**
@@ -18,15 +21,38 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady() {
-
+    async onReady() {
+        this.getHistory()
+        this.addListener()  
+    },
+    addListener() {
+        // 监听消息，append至最末尾
+        const current: IConversation = app.globalData.currentConversation
+        current.onMessage((message: {from: string, msg: string}) => {
+            console.log('收到了消息！', message)
+            const {historyMessages} = this.data
+            this.setData({
+                historyMessages: [...historyMessages, message]
+            })
+        })
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow() {
+    async getHistory () {
+        const current: IConversation = app.globalData.currentConversation
+        await current.getConversation()
+        const messages = await current.getMessage(10)
+        console.log('历史记录', messages)
+        this.setData({
+            historyMessages: messages.map((item: {from: string, _lctext: string}) => ({
+                from: item.from,
+                msg: item._lctext
+            }))
+        })
+    },
 
+    sendMessage () {
+        const current: IConversation = app.globalData.currentConversation
+        current.sendMessage(this.data.inputMessage)
     },
 
     /**

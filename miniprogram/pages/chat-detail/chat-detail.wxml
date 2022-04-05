@@ -1,2 +1,12 @@
 <!--pages/chat-detail/chat-detail.wxml-->
-<text>pages/chat-detail/chat-detail.wxml</text>
+<div class="container">
+    <div class="box">
+        <div wx:for="{{historyMessages}}">
+        {{item.from}}: {{item.msg}}<br/>
+        </div>
+    </div>
+    <div class="box">
+        <input model:value="{{inputMessage}}" placeholder="请输入要发送的内容"/>
+        <button bindtap="sendMessage">Send</button>
+    </div>
+</div>

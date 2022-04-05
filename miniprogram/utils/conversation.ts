@@ -1,28 +1,25 @@
 import { addRecord } from './db'
 export const conversationIndex = 'conversation'
-const { TextMessage } = require('../libs/im.min.js');
-interface IUser {
-    createConversation: any, 
-    getConversation: any
-}
-interface IConversation {
-    queryMessages: any,
-    id: string,
-    name: string,
-    send: any,
-}
+const { TextMessage, Event } = require('../libs/im.min.js');
 export class Conversation {
     user: IUser  = {} as IUser
     conversationId = ''
-    conversation: IConversation = {} as IConversation
+    conversation: ILeanConversation = {} as ILeanConversation
     constructor(user: any, conversationId?: string) {
         this.user = user
         this.conversationId = conversationId || ''
     }
-    getConversation () {
-        this.user.getConversation(this.conversationId).then(conversation => {
-            this.conversation = conversation
-        })
+    async getConversation () {
+        this.conversation = await this.user.getConversation(this.conversationId)
+        console.log('获取conversation', this.conversation)
+    }
+    onMessage(cb) {
+        this.user.on(Event.MESSAGE, (message: {_lctext: string, from: string}) => {
+            cb({
+                from: message.from,
+                msg: message._lctext
+            })
+        }) 
     }
     getMessage (limit: number = 10) {
         return this.conversation.queryMessages({
