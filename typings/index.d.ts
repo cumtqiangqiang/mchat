@@ -18,7 +18,10 @@ interface IConversation {
   sendMessage: any,
   getConversation: any,
   onMessage: any,
-  conversationId: string
+  conversationId: string,
+  user: {
+    id: string
+  }
 }
 interface ILeanConversation {
   id: string,

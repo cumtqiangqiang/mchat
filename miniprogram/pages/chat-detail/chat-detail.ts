@@ -53,6 +53,16 @@ Page({
     sendMessage () {
         const current: IConversation = app.globalData.currentConversation
         current.sendMessage(this.data.inputMessage)
+        // 如果发送成功，需要在history增加一条记录
+        const { historyMessages } = this.data
+        console.log('查一下“我”！', current)
+        this.setData({
+            historyMessages: [...historyMessages, {
+                from: current.user.id,
+                msg: this.data.inputMessage
+            }],
+            inputMessage: ''
+        })
     },
 
     /**
