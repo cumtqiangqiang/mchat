@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="send-box">
-        <input model:value="{{inputMessage}}" placeholder="请输入要发送的内容"/>
+        <input model:value="{{inputMessage}}" placeholder="Message you want to send"/>
         <image class="img" src="../../assets/send.svg" bindtap="sendMessage"/>
     </div>
 </div>
