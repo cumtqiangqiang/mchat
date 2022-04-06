@@ -1,4 +1,3 @@
-import { Chat } from '../../utils/chat'
 import { Conversation, createConversation } from '../../utils/conversation'
 import {isEmtyObj} from '../../utils/util'
 
@@ -10,11 +9,6 @@ Page({
     data: {
         conversationList: [],
         friendName: '',
-
-        userInfo: {
-            avatarUrl: '',
-            nickName: ''
-        },
         hasUserInfo: false
     },
 
@@ -23,33 +17,10 @@ Page({
      */
     onLoad() {
     },
-    getUserProfile() {
-        // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-        wx.getUserProfile({
-            desc: 'get your profile', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-            success: (res) => {
-                console.log(res)
-                this.setUserInfoData(res.userInfo)
-            }
-        })
-    },
-    setUserInfoData (userInfo: any) {
-        this.setData({
-            userInfo,
-            hasUserInfo: true,
-        })
-        chat.login(this.data.userInfo.nickName)
-    },
-
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
-        chat = new Chat()
-        this.setData({
-           //  chat,
-            conversationList: chat.getConversationList()
-        })
     },
     async toDetail(event: {currentTarget: {dataset: {cid: string}}}) {
         const cid = event.currentTarget.dataset.cid
@@ -82,7 +53,18 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
-        console.log('on show! chat is:', chat)
+        // 判断登录状态，如果未登录，跳转至home页
+        if(!getApp().globalData.hasUserInfo) {
+            wx.switchTab({
+                url: '/pages/home/home'
+            })
+            return
+        } else {
+            this.setData({
+                hasUserInfo: true
+            })
+        }
+        chat = getApp().globalData.chat
         // 更新列表
         if (!isEmtyObj(chat)) {
             this.setData({

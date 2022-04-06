@@ -1,0 +1,52 @@
+$primary-color: #4321d3;
+$sub-color: #d992ff;
+$padding: 8px;
+page {
+    background: #e4e4e4;
+}
+.home {
+    .userinfo {
+        padding: 0 $padding;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #aaa;
+      }
+      
+      .userinfo-avatar {
+        overflow: hidden;
+        width: 128rpx;
+        height: 128rpx;
+        margin: 20rpx;
+        border-radius: 50%;
+      }
+    .block-box {
+        background-color: white;
+        margin-bottom: 10px;
+        display: block;
+        padding: 0 0 0 $padding;
+        .block {
+            padding: 0 $padding 0  0;
+            line-height: 3;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            border-bottom: 1px solid #aaaaaa52;
+            &:last-of-type {
+                border-bottom: none;
+            }
+            span {
+                display: inline-block;
+            }
+        }
+    }
+    .primary {
+        color: $primary-color;
+    }
+    .sub {
+        color: $sub-color;
+    }
+    .default {
+        color: #666;
+    }
+}

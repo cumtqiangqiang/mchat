@@ -1,11 +1,16 @@
 // pages/home/home.ts
+import { Chat } from '../../utils/chat'
+let chat = {} as IChat
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
-
+        userInfo: {
+            avatarUrl: '',
+            nickName: ''
+        },
+        hasUserInfo: false
     },
 
     /**
@@ -14,12 +19,31 @@ Page({
     onLoad() {
 
     },
+    getUserProfile() {
+        // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+        wx.getUserProfile({
+            desc: 'get your profile', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+            success: (res) => {
+                console.log(res)
+                this.setUserInfoData(res.userInfo)
+            }
+        })
+    },
+    setUserInfoData (userInfo: any) {
+        this.setData({
+            userInfo,
+            hasUserInfo: true,
+        })
+        chat.login(this.data.userInfo.nickName)
+        getApp().globalData.chat = chat
+        getApp().globalData.hasUserInfo = true
+    },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady() {
-
+        chat = new Chat()
     },
 
     /**

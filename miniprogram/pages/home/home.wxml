@@ -1,2 +1,37 @@
-<!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<div class="home">
+    <button wx:if="{{!hasUserInfo}}" bindtap="getUserProfile">Click to login</button>
+    <div class="profile block-box">
+        <view class="userinfo">
+            <block wx:if="{{hasUserInfo}}">
+                <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+                <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+            </block>
+        </view>
+    </div>
+    <div class="block-box">
+        <div class="block">
+            <span class="primary">Wallet</span>
+            <icon>></icon>
+        </div>
+    </div>
+    <div class="block-box">
+        <div class="block">
+            <span class="sub">Album</span>
+            <icon>></icon>
+        </div>
+        <div class="block">
+            <span class="sub">Collection</span>
+            <icon>></icon>
+        </div>
+        <div class="block">
+            <span class="sub">Favorite</span>
+            <icon>></icon>
+        </div>
+    </div>
+    <div class="block-box">
+        <div class="block">
+            <span class="default">Setting</span>
+            <icon>></icon>
+        </div>
+    </div>
+</div>
