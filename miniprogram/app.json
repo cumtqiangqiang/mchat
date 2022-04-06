@@ -16,6 +16,7 @@
   "sitemapLocation": "sitemap.json",
   "tabBar": {
     "position": "top",
+    "selectedColor": "#4321d3",
     "list": [
       {
         "pagePath": "pages/chat-list/chat-list",
